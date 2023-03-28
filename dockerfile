@@ -18,7 +18,7 @@ ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-l
     MAVEN_HOME="/usr/share/maven" \
     GRADLE_HOME="/usr/share/gradle" \
     ANDROID_SDK_ROOT="/opt/android" \
-    ANDROID_HOME="/opt/android/sdk"
+    ANDROID_HOME="/opt/android"
 
 ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION:$ANT_HOME/bin:$MAVEN_HOME/bin:$GRADLE_HOME/bin
 
