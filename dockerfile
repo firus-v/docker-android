@@ -3,7 +3,7 @@ FROM firusv/base
 # JAVA
 
 RUN apt-get update && \
-    apt-get -y install openjdk-11-jdk-headless && \
+    apt-get -y install openjdk-11-jdk-headless unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     java -version
@@ -14,9 +14,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 
 ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip" \
     ANDROID_BUILD_TOOLS_VERSION=33.0.1 \
+    GRADLE_URL="https://services.gradle.org/distributions/gradle-7.3.3-bin.zip" \
     ANT_HOME="/usr/share/ant" \
     MAVEN_HOME="/usr/share/maven" \
-    GRADLE_HOME="/usr/share/gradle" \
+    GRADLE_HOME="/opt/gradle-7.3.3" \
     ANDROID_SDK_ROOT="/opt/android" \
     ANDROID_HOME="/opt/android"
 
@@ -25,10 +26,12 @@ ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/plat
 WORKDIR /opt
 
 RUN apt-get -qq update && \
-    apt-get -qq install -y wget curl maven ant gradle
+    apt-get -qq install -y wget curl maven ant && \
+    wget -O gradle.zip ${GRADLE_URL} && \
+    unzip gradle.zip && rm gradle.zip
 
 # Installs Android SDK
-RUN mkdir android && cd android && \
+RUN cd /opt && mkdir android && cd android && \
     wget -O tools.zip ${ANDROID_SDK_URL} && \
     unzip tools.zip && rm tools.zip && \
     cd cmdline-tools && \
