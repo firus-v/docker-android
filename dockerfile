@@ -17,7 +17,7 @@ ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-l
     GRADLE_URL="https://services.gradle.org/distributions/gradle-8.0.2-all.zip" \
     ANT_HOME="/usr/share/ant" \
     MAVEN_HOME="/usr/share/maven" \
-    GRADLE_HOME="/opt/gradle-7.3.3" \
+    GRADLE_HOME="/opt/gradle-8.0.2" \
     ANDROID_SDK_ROOT="/opt/android" \
     ANDROID_HOME="/opt/android"
 
