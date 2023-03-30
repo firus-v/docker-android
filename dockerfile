@@ -14,14 +14,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 
 ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip" \
     ANDROID_BUILD_TOOLS_VERSION=33.0.1 \
-    GRADLE_URL="https://services.gradle.org/distributions/gradle-7.3.3-bin.zip" \
+    GRADLE_URL="https://services.gradle.org/distributions/gradle-8.0.2-all.zip" \
     ANT_HOME="/usr/share/ant" \
     MAVEN_HOME="/usr/share/maven" \
     GRADLE_HOME="/opt/gradle-7.3.3" \
     ANDROID_SDK_ROOT="/opt/android" \
     ANDROID_HOME="/opt/android"
 
-ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION:$ANT_HOME/bin:$MAVEN_HOME/bin:$GRADLE_HOME/bin
+ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION:$ANT_HOME/bin:$MAVEN_HOME/bin:$GRADLE_HOME/bin
 
 WORKDIR /opt
 
@@ -39,7 +39,7 @@ RUN cd /opt && mkdir android && cd android && \
     ls | grep -v latest | xargs mv -t latest
 
 RUN mkdir /root/.android && touch /root/.android/repositories.cfg && \
-    while true; do echo 'y'; sleep 2; done | sdkmanager "platform-tools" "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
+    while true; do echo 'y'; sleep 2; done | sdkmanager "platform-tools" "tools" "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
     while true; do echo 'y'; sleep 2; done | sdkmanager "platforms;android-28" "platforms;android-29" "platforms;android-30" && \
     while true; do echo 'y'; sleep 2; done | sdkmanager "platforms;android-31" "platforms;android-32" "platforms;android-33" && \
     while true; do echo 'y'; sleep 2; done | sdkmanager "extras;android;m2repository" "extras;google;google_play_services" "extras;google;instantapps" "extras;google;m2repository" &&  \
